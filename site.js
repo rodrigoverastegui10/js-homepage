@@ -74,3 +74,9 @@ if (isMorning) {
 
 document.getElementById('welcome').textContent = message;
 
+
+document.addEventListener("DOMContentLoaded", function () {
+    const key = "It's a secret to everybody."; 
+    
+    localStorage.setItem(key, ' Zelda ');
+});
