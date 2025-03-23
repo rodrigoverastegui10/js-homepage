@@ -120,6 +120,43 @@ const previousbutton = document.querySelector('#prev');
         showImages();
     }, 5000);
 
+    const todoList = document.getElementById('todo-list');
+    const input = document.getElementById('new-todo');
+    const button = document.getElementById('add-todo');
+
+    // Get the list from local storage
+const todos = JSON.parse(localStorage.getItem('todo-list')) || []
+
+// Add a new item to the list
+todos.push({ text: input.value, completed: false })
+
+// Save the list to local storage
+localStorage.setItem('todo-list', JSON.stringify(todos))
+
+// Clear the li's before we recreate them
+const renderToDo = () => {
+todoList.innerHTML = '';
+todos.forEach (todo => {
+// Create and add new list items to the DOM
+const li = document.createElement('li')
+li.textContent = todo.text
+todoList.append(li);
+});
+}
+
+button.addEventListener('click', () => {
+    const newToDo = input.value;
+    if (newToDo === '') return;
+
+    todos.push ({ text: newToDo, completed: false});
+    localStorage.setItem('todo-list', JSON.stringify(todos));
+    input.value = '';
+    renderToDo();
+})
+
+renderToDo()
+
+
     
     
 
