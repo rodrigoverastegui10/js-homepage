@@ -1,5 +1,4 @@
 
-
 const movies = [
     {
         "title": "The Dark Knight",
@@ -57,11 +56,11 @@ movies.forEach(movies => {
     })
 })
 
-const hours = new Date().getHours() // get the current hour
+const hours = new Date().getHours() 
 
-const isMorning = hours >= 4 && hours < 12 // is it morning?
-const isAfternoon = hours >= 12 && hours < 17 // is it afternoon?
-const isEvening = hours >= 17 || hours < 4 // is it evening?
+const isMorning = hours >= 4 && hours < 12 
+const isAfternoon = hours >= 12 && hours < 17 
+const isEvening = hours >= 17 || hours < 4 
 
 let message = "";
 if (isMorning) {
@@ -115,7 +114,7 @@ const previousbutton = document.querySelector('#prev');
 
 
     setInterval(() => {
-        // code to run EVERY 5 seconds
+        
         currentImage = (currentImage + 1) % urls.length;
         showImages();
     }, 5000);
@@ -154,8 +153,34 @@ button.addEventListener('click', () => {
     renderToDo();
 })
 
-renderToDo()
+renderToDo();
 
+const parentElement = document.getElementById('pokemon')
+
+const renderPokemon = pokemon => {
+    const img = document.createElement('img')
+    img.src = pokemon.sprites.front_default; // url of the image from the 'front_default' property
+    img.alt = pokemon.name;// name of the pokemon
+    parentElement.append(img)
+    
+};
+
+const getRandomPokemon = async () => {
+    try {
+        const url = 'https://pokeapi.co/api/v2/pokemon/' + Math.floor(Math.random() * 150)
+        const response = await fetch(url);
+        const data = await response.json()
+        return data
+    } catch(error) {
+        console.log(error)
+    }
+};
+
+
+(async () => {
+    const pokemon = await getRandomPokemon();
+    renderPokemon(pokemon);
+})()
 
     
     
